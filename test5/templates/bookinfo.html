@@ -1,0 +1,10 @@
+<ul>
+    {% for foo in book%}
+        <li>
+            <a href="http://localhost:8000/person/?id={{foo.id}}">{{foo.bookname}}</a>
+        </li>
+
+
+    {% endfor %}
+
+</ul>

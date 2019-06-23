@@ -1,0 +1,112 @@
+{% extends 'base_main.html' %}
+{% load  static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/cart/css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="cart">
+        <div class="cart">
+            <h3><b>购物车</b></h3>
+            <section class="full">
+                <section>
+                    <ul>
+                        <li>
+                            <div class="clear">
+                                <p class="infoJustify">
+                                    收货人
+                                    <b></b>
+                                </p>
+                                <p>
+                                    :
+                                    <span>ROCK</span>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clear">
+                                <p class="infoJustify">
+                                    电话
+                                    <b></b>
+                                </p>
+                                <p>
+                                    :
+                                    <span>110</span>
+                                    <a href="" class="change">修改></a>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="clear">
+                                <p class="infoJustify">
+                                    收货地址
+                                    <b></b>
+                                </p>
+                                <p>
+                                    :
+                                    <span>河南省南阳市卧龙区</span>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <section class="bill">
+                        <p>闪送超市</p>
+                        <p>0元起送,22:00前免30运费</p>
+                        <a href="">凑单专区</a>
+                    </section>
+                    <section class="delivery">
+                        <span>收货时间</span>
+                        <span>一小时送达</span>
+                        <a href="">可预订></a>
+                    </section>
+                    <section class="delivery">
+                        <span>收货备注</span>
+                        <input type="text" placeholder="可输入100字以内特殊要求">
+                    </section>
+                    <menu>
+                        <ul>
+                            {% for cart in carts %}
+                                <li class="menuList" id="{{ cart.id }}">
+                                    <div class="confirm">
+                                        <span class="is_choosed" ></span>
+
+                                    </div>
+                                    <a href="#">
+                                        <img src="{{ cart.goodid.productimg }}" alt="{{ cart.goodid.productname }}">
+                                        <p>{{ cart.goodid.productlongname }}</p>
+                                    </a>
+                                    <section>
+                                        <button class="subshop">-</button>
+                                        <span>{{ cart.gnum }}</span>
+                                        <button class="addshop">+</button>
+                                    </section>
+                                </li>
+                            {% endfor %}
+
+                            <li class="payTheBill">
+                                <div class="confirm">
+                                <span class="all_select">
+                                </span>
+                                </div>
+                                <p>
+                                    <span>全选</span>
+                                    <span>总价:</span>
+
+                                </p>
+                                <span id="getorder">下单</span>
+                            </li>
+
+                        </ul>
+                    </menu>
+                </section>
+            </section>
+        </div>
+
+    </div>
+{% endblock %}
+{% block extJS %}
+    <script type="text/javascript" src="{% static 'app/cart/js/yy.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/market/css/market.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="market">
+        {#  侧面菜单栏  #}
+        <aside>
+            <ul>
+                {% for foo in foodtypes %}
+                    <li>
+                        <a href="{% url 'app:market_param' foo.typeid 0 1 %}">{{ foo.typename }}</a>
+                        {% ifequal foo.typeid typeid %}
+                            <span class="yellowSlide"></span>
+                        {% endifequal %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+        {#  右面商品栏  #}
+        <section>
+            <nav>
+                <ul>
+                    <li id="alltypes">
+                        <span >全部分类<span id="typesdown" class="glyphicon glyphicon-chevron-down" style="font-weight: 100"></span></span>
+                    </li>
+                    <li id="allsort">
+                        <span>综合排序<span id="sortdown"  class="glyphicon glyphicon-chevron-down" style="font-weight: 100"></span></span>
+                    </li>
+                </ul>
+            </nav>
+
+            <menu>
+                <ul>
+                    {% for good in goods %}
+                        <li>
+                            <a href="">
+                                <img src="{{ good.productimg }}" alt="">
+                                <span class="shoppingInfo">
+                                    <h6>{{ good.productlongname }}</h6>
+                                    <p class="detailTag">
+                                        <span>
+                                            精选
+                                        </span>
+                                        <span>
+
+                                        </span>
+                                    </p>
+                                    <span class="unit">{{ good.specifics }}</span>
+                                    <p class="price">
+                                        <span>
+                                            ¥{{ good.price }}
+                                        </span>
+                                        <s>¥{{ good.marketprice }}</s>
+                                    </p>
+
+                                </span>
+                            </a>
+                            <section>
+                                <button id="{{ good.id }}" class="subgood">-</button>
+                                <span>0</span>
+                                <button id="{{ good.id }}" class="addgood">+</button>
+                            </section>
+                        </li>
+
+                    {% endfor %}
+                </ul>
+
+                <div id="goodscontainer" style="display: none">
+                    <div>
+                        {% for name in names %}
+                            <a href="{% url 'app:market_param' typeid name.1 1 %}">
+                                <span>
+                                    {{ name.0 }}
+                                </span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="sort" style="display: none">
+                    <div>
+                        <a href="{% url 'app:market_param' typeid cid 1 %}">
+                            <span>
+                                综合排序
+                            </span>
+                        </a>
+                        <a href="{% url 'app:market_param' typeid cid 2 %}">
+                            <span>
+                                销量排序
+                            </span>
+                        </a>
+                        <a href="{% url 'app:market_param' typeid cid 3 %}">
+                            <span>
+                                价格升序
+                            </span>
+                        </a>
+                        <a href="{% url 'app:market_param' typeid cid 4 %}">
+                            <span>
+                                价格降序
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </menu>
+        </section>
+    </div>
+{% endblock %}
+{% block extJS %}
+    <script type="text/javascript" src="{% static 'app/market/js/market.js' %}"></script>
+{% endblock %}

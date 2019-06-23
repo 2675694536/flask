@@ -1,0 +1,9 @@
+<ul>
+    {% for rooms in room %}
+      <li>
+          <a href="{% url 'app:getstu' rooms.id %}">{{ rooms.name }}</a>
+      </li>
+
+    {% endfor %}
+
+</ul>

@@ -1,0 +1,83 @@
+{% extends 'base_main.html' %}
+{% load  static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/market/css/market.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="market">
+        {#        左边导航#}
+        <aside>
+            <ul>
+                {% for food in foodtypes %}
+                    <li>
+                        <a href="{% url 'app:marketparam' food.typeid 0 1 %}">{{ food.typename }}</a>
+                        {% ifequal food.typeid typeid %}
+                            <span class="yellowSlide"></span>
+                        {% endifequal %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+        {#        右边商品#}
+        <section>
+            <nav>
+                <ul>
+                    <li id="alltypes"><span>全部类型<span id="typedown" class="glyphicon glyphicon-chevron-down"
+                                                      style="font-weight: 100"></span></span></li>
+                    <li id="allsort"><span>综合排序<span id="sortdown" class="glyphicon glyphicon-chevron-down"
+                                                     style="font-weight: 100"></span></span></li>
+                </ul>
+            </nav>
+            <menu>
+                <ul>
+                    {% for good in goods %}
+                        <li>
+                            <a href="">
+                                <img src="{{ good.productimg }}" alt="">
+                                <artile class="shoppingInfo">
+                                    <h6>{{ good.productname }}</h6>
+                                    <p class="detailTag">
+                                        <span>精选</span>
+                                        <span></span>
+                                    </p>
+                                    <span class="unit">{{ good.specifics }}</span>
+                                    <p class="price">
+                                        <span>¥{{ good.price }}</span>
+                                        <s><span>¥{{ good.marketprice }}</span></s>
+                                    </p>
+                                </artile>
+                            </a>
+                            <section>
+                                <button id="{{ good.id }}" class="subgood">-</button>
+                                <span>0</span>
+                                <button id="{{ good.id }}" class="addgood">+</button>
+                            </section>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div id="goodscontainer" style="display: none">
+                    <div id="alltypes">
+                        {% for name in names %}
+                            <a href="{% url 'app:marketparam' typeid name.1 1 %}"><span>{{ name.0 }}</span></a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="sort" style="display: none">
+                    <div>
+                        <a href="{% url 'app:marketparam' typeid cid 1 %}" class="sorta"><span>综合排序</span></a>
+                        <a href="{% url 'app:marketparam' typeid cid 2 %}" class="sorta"><span>销量排序</span></a>
+                        <a href="{% url 'app:marketparam' typeid cid 3 %}" class="sorta"><span>价格最低</span></a>
+                        <a href="{% url 'app:marketparam' typeid cid 4 %}" class="sorta"><span>价格最高</span></a>
+                    </div>
+                </div>
+            </menu>
+        </section>
+
+
+    </div>
+{% endblock %}
+{% block extJS %}
+    <script type="text/javascript" src="{% static 'app/market/js/market.js' %}"></script>
+{% endblock %}

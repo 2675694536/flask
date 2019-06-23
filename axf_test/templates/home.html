@@ -1,0 +1,142 @@
+{% extends 'base_main.html' %}
+{% load  static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="../static/app/home/css/home.css">
+{% endblock %}
+
+{% block content %}
+    <div id="home">
+
+        <div class="swiper-container" id="topSwiper">
+            <div class="swiper-wrapper">
+                {% for wheel in wheels %}
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <img src="{{ wheel.img }}" alt="{{ wheel.name }}">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- 如果需要滚动条 -->
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="topMenu">
+            <nav>
+                <ul>
+                    {% for nav in navs %}
+                        <li><img src="{{ nav.img }}" alt="{{ nav.name }}">
+                            <span>{{ nav.name }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+        </div>
+
+
+        <div class="swiper-container" id="swiperMenu">
+            <ul class="swiper-wrapper">
+                {% for must in mustbuy %}
+                    <li>
+                        <a href="">
+                            <img src="{{ must.img }}" alt="{{ must.name }}">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="CVS">
+            <h2>
+                <img src="{{ shop1.img }}" alt="">
+            </h2>
+            <fieldset>
+                {% for shop in shop2 %}
+                    <a href="">
+                        <img src="{{ shop.img }}" alt="">
+                    </a>
+                {% endfor %}
+            </fieldset>
+            <ul>
+                {% for s in shop3 %}
+                    <li>
+                        <img src="{{ s.img }}" alt="">
+                        <span>{{ s.name }}</span>
+                    </li>
+                {% endfor %}
+
+
+            </ul>
+            <ol>
+                {% for foo in shop4 %}
+                    <li>
+                        <a href="">
+                            <img src="{{ foo.img }}" alt="">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <div class="mainInfo">
+            {% for main in mainshow %}
+                <section>
+                    <h3>
+                        {{ main.name }}
+                        <a href="">更多></a>
+                        <span></span>
+                    </h3>
+                    <div>
+                        <a href="">
+                            <img src="{{ main.img }}" alt="">
+                        </a>
+                    </div>
+                        <ul>
+                            <li>
+                                <a href="">
+                                    <img src="{{ main.img1 }}" alt="">
+                                    <span class="description">{{ main.longname1 }}</span>
+                                    <span>¥{{ main.price1 }}</span>
+                                    <s>{{main.marketprice1  }}</s>
+                                </a>
+                                <button>
+                                    <span>+</span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="{{ main.img2 }}" alt="">
+                                    <span class="description">{{ main.longname2 }}</span>
+                                    <span>¥{{ main.price2 }}</span>
+                                    <s>{{ main.marketprice2 }}</s>
+                                </a>
+                                <button>
+                                    <span>+</span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <img src="{{ main.img3 }}" alt="">
+                                    <span class="description">{{ main.longname3}}</span>
+                                    <span>¥{{ main.price3 }}</span>
+                                    <s>{{ main.marketprice3 }}</s>
+                                </a>
+                                <button>
+                                    <span>+</span>
+                                </button>
+                            </li>
+                        </ul>
+
+                </section>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block extJS %}
+    <script type="text/javascript" src="../static/app/home/js/home.js"></script>
+{% endblock %}

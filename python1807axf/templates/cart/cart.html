@@ -1,0 +1,101 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block extcss %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/cart/cart.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="cart">
+        <h3><b>购物车</b></h3>
+
+        <div class="full">
+            <section>
+                <ul>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">收货人:</p>
+                            <p><span>王宇琛</span></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">电话:</p>
+                            <p><span>110</span><a class="change" href="#">修改&gt;</a></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">收货地址:</p>
+                            <p><span>郑州二七区海为科技园</span></p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="bill">
+                    <p>闪送超市</p>
+                    <a href="#">凑单专区</a>
+                    <p>¥0起送,22:00前满¥30免运费</p>
+                </div>
+
+                <section class="delivery">
+                    <span>收货时间</span>
+                    <span>一小时送达</span>
+                    <a href="#">可预订&gt;</a>
+                </section>
+                <section class="delivery">
+                    <span>收货备注</span>
+                    <input type="text" placeholder="可输入你的特殊服务要求 我们尽量满足 美女没有 帅哥一堆">
+                </section>
+            </section>
+
+
+            <menu>
+                <ul>
+                    {% for cart in carts %}
+                        <li class="menuList"  id="{{ cart.id }}">
+                            <div class="confirm">
+                                        <span class="is_choosed" id="{{ cart.is_selected }}">
+                                            {% if cart.is_selected %}
+                                                <span>√</span>
+                                                {% else %}
+                                                <span></span>
+                                            {% endif %}
+                                        </span>
+                            </div>
+                            <a href="#">
+                                <img src="{{ cart.c_goods.productimg }}" alt="{{ cart.c_goods.productname }}">
+                                <p>{{ cart.c_goods.productlongname }}</p>
+                            </a>
+                            <section>
+                                <button class="subshop">-</button>
+                                <span>{{ cart.c_num }}</span>
+                                <button class="addshop">+</button>
+                            </section>
+                        </li>
+                    {% endfor %}
+
+                    <li class="payTheBill">
+                        <div class="confirm">
+                                <span class="all_select">
+                                    <span>√</span>
+                                </span>
+                        </div>
+                        <p>
+                            <span>全选</span>
+                            <span>总价:</span>
+                        </p>
+                        <span id="getorder">下单</span>
+                    </li>
+
+                </ul>
+
+            </menu>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'app/cart/js/cart.js' %}"></script>
+{% endblock %}

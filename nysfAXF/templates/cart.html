@@ -1,0 +1,122 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="../static/app/cart/css/cart.css">
+{% endblock %}
+
+{% block content %}
+    <div id="cart">
+        <h3>
+            购物车
+        </h3>
+
+        <div class="full">
+            <section>
+                <ul>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">
+                                收货人
+                            </p>
+                            <p>
+                                <span>
+                                    胡冠雨
+                                </span>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">
+                                电话
+                            </p>
+                            <p>
+                                <span>
+                                    110
+                                </span>
+                                <a class="change" href="">修改></a>
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">
+                                收货地址
+                            </p>
+                            <p>
+                                <span>
+                                    南阳师范学院西区实训楼3号楼317
+                                </span>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="bill">
+                    <p>
+                        闪送超市
+                    </p>
+                    <a href="">
+                        凑单专区
+                    </a>
+                    <p>
+                        ¥0起送,22:00前满¥30免运费
+                    </p>
+                </div>
+                <div class="delivery">
+                    <span>收货时间</span>
+                    <span>一小时送达</span>
+                    <a href="">可预订></a>
+                </div>
+                <div class="delivery">
+                    <span>收货备注</span>
+                    <input type="text" placeholder="可输入你的特殊服务要求 我们尽量满足 美女没有 帅哥一堆">
+                </div>
+            </section>
+
+            <menu>
+                <ul>
+                    {% for cart in carts %}
+
+                        <li class="menuList">
+                            <div class="confirm">
+                                    <span class="is_choosed">
+                                        <span></span>
+                                    </span>
+                            </div>
+                            <a href="#">
+                                <img src="" alt="">
+                                <p>{{ cart.gname }}</p>
+                            </a>
+                            <section>
+                                <button id="{{ cart.id }}" class="subshop">-</button>
+                                    <span>{{ cart.gnum }}</span>
+                                <button id="{{ cart.id }}"  class="addshop">+</button>
+                            </section>
+                        </li>
+                    {% endfor %}
+
+                    <li class="payTheBill">
+                        <div class="confirm">
+                                <span class="all_select">
+                                    <span>√</span>
+                                </span>
+                        </div>
+                        <p>
+                            <span>全选</span>
+                            <span>总价:</span>
+                        </p>
+                        <span id="getorder">下单</span>
+                    </li>
+
+                </ul>
+
+            </menu>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extJS %}
+     <script type="text/javascript" src="{% static 'app/cart/js/cart.js' %}"></script>
+{% endblock %}

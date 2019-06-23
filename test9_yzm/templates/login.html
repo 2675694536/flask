@@ -1,0 +1,10 @@
+<form action="{% url 'app:dologin' %}"method="post">
+    <span>用户名:</span>
+    <input type="text" name="name" placeholder="请输入账号">
+    <br>
+    <input type="text" name="yzm" placeholder="请输入验证码">
+    <br>
+    <img id="verify_code" src="{% url 'app:huahua' %}" alt="验证码" width="200px" height="100px">
+    <br>
+    <button>登录</button>
+</form>

@@ -1,0 +1,113 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block extcss %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/market/market.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="market">
+        {#  侧边栏  #}
+        <aside>
+            <ul>
+                {% for type in types %}
+                    <li>
+                        <a href="{% url 'app:infomarket' type.typeid 0 0 %}">
+                            {{ type.typename }}
+                        </a>
+                        {% ifequal typeid type.typeid %}
+                            <span class="yellowSlide"></span>
+                        {% endifequal %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        {#  上层的div加上下面的内容展示  #}
+        <section>
+            <nav>
+                <ul>
+                    <li id="all_types">
+                    <span >
+                        全部分类
+                        <span id="all_types_logo"  class="glyphicon glyphicon-chevron-down"></span>
+                    </span>
+                    </li>
+                    <li id="multiple_sort">
+                    <span>
+                        综合排序
+                        <span id="multiple_sort_logo"  class="glyphicon glyphicon-chevron-down"></span>
+                    </span>
+                    </li>
+                </ul>
+            </nav>
+            
+            <menu>
+                <ul>
+                    {% for good in goods %}
+                        <li>
+                            <a href="">
+                                <img src="{{ good.productimg }}" alt="{{ good.productname }}">
+                                <div class="shoppingInfo">
+                                    <h6>{{ good.productlongname }}</h6>
+                                     <p class="detailTag">
+                                    <span>精选</span>
+                                    </p>
+                                    <p class="unit">
+                                            {{ good.specifics }}
+                                    </p>
+                                    <p class="price">
+                                        <span>{{ good.price }}</span>
+                                        <s>{{ good.marketprice }}</s>
+                                    </p>
+                                </div>
+                            </a>
+
+                            <section>
+                                <button id="{{ good.id }}" class="subcart">-</button>
+                                <span>0</span>
+                                <button id="{{ good.id }}" class="addcart">+</button>
+                            </section>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+
+
+                {#    全部分类        #}
+                <div id="type_container" hidden="hidden">
+                    <div>
+                        {% for foo in typelist %}
+                            {#    三级联动的传值操作    #}
+                            <a href="{% url 'app:infomarket' typeid foo.1 0 %}">
+                                <span>{{ foo.0 }}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {#      综合排序      #}
+                <div id="sort_container" hidden="hidden">
+                    <div>
+                        <a href="{% url 'app:infomarket' typeid cid 0 %}">
+                            <span>综合排序</span>
+                        </a>
+                        <a href="{% url 'app:infomarket' typeid cid 1 %}">
+                            <span>销量排序</span>
+                        </a>
+                        <a href="{% url 'app:infomarket' typeid cid 2 %}">
+                            <span>价格升序</span>
+                        </a>
+                        <a href="{% url 'app:infomarket' typeid cid 3 %}">
+                            <span>价格降序</span>
+                        </a>
+                    </div>
+                </div>
+            </menu>
+        </section>
+    </div>
+{% endblock %}
+
+{% block extjs %}
+    <script type="text/javascript" src="{% static 'app/market/js/market.js' %}"></script>
+{% endblock %}

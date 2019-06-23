@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extJS %}
+    <script type="text/javascript" src="{% static 'app/order/js/order.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="order_info" class="container">
+
+
+    <h3>订单编号:{{ orderid }}</h3>
+
+    <ul>
+
+        {% for good in goodlist %}
+
+            <li>
+
+                <img src="{{ good.og_good.productimg }}">
+
+                <span>{{ good.og_good.productname }}</span>
+            </li>
+
+
+        {% endfor %}
+
+
+    </ul>
+
+        <button id="alipay" class="btn btn-success btn-block">Alipay</button>
+
+    </div>
+
+
+{% endblock %}
